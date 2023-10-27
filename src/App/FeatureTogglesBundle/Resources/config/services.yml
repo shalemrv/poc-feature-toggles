@@ -1,0 +1,4 @@
+services:
+#    feature_toggles.example:
+#        class: App\FeatureTogglesBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

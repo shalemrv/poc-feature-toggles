@@ -1,0 +1,8 @@
+invoice_homepage:
+    path:     /
+    defaults: { _controller: InvoicesBundle:Default:index }
+
+
+invoice_annotation_routes:
+    resource: '@InvoicesBundle/Controller/'
+    type: annotation

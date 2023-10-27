@@ -1,0 +1,3 @@
+feature_toggles_homepage:
+    path:     /
+    defaults: { _controller: FeatureTogglesBundle:Default:index }

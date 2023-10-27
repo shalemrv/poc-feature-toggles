@@ -1,0 +1,14 @@
+feature_toggles:
+    resource: "@FeatureTogglesBundle/Controller"
+    prefix:   /
+    type: annotation
+
+invoice:
+    resource: "@InvoicesBundle/Controller"
+    prefix:   /
+    type: annotation
+
+projects:
+    resource: "@ProjectsBundle/Controller"
+    prefix:   /
+    type: annotation

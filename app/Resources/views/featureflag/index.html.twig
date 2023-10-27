@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Featureflags list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Active</th>
+                <th>Percentage</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for featureFlag in featureFlags %}
+            <tr>
+                <td><a href="{{ path('feauture-toggles_show', { 'id': featureFlag.id }) }}">{{ featureFlag.id }}</a></td>
+                <td>{{ featureFlag.name }}</td>
+                <td>{% if featureFlag.active %}Yes{% else %}No{% endif %}</td>
+                <td>{{ featureFlag.percentage }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('feauture-toggles_show', { 'id': featureFlag.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('feauture-toggles_edit', { 'id': featureFlag.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('feauture-toggles_new') }}">Create a new featureFlag</a>
+        </li>
+    </ul>
+{% endblock %}

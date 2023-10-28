@@ -2,7 +2,7 @@
 
 namespace App\InvoicesBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
+use App\InvoicesBundle\Entity\Invoice;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,7 +25,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $invoices = $em->getRepository('InvoicesBundle:Invoice')->findAll();
+        $invoices = $em->getRepository(Invoice::class)->findAll();
 
         $invoicesJson = [];
 

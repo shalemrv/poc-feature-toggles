@@ -2,6 +2,7 @@
 
 namespace App\ProjectsBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use App\Common\Services\ServicesList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,6 +24,37 @@ use App\Common\Traits\HttpRequestTrait;
 class DefaultController extends Controller
 {
     use HttpRequestTrait;
+
+    private function createInvoiceThroughMicroservice($service, $request) {
+        // Microservice called here
+        return [
+            "message" => "Invoice Microservice called"
+        ];
+    }
+
+    private function createInvocieForProject(EntityManager &$em, Project $project) {
+
+        $featureTogglesService = $this->get(ServicesList::FEATURE_TOGGLES);
+        
+        if($featureTogglesService->isAllowed(FeatureFlag::INVOICE_GENERATION_MICROSERVICE))
+            return $this->createInvoiceThroughMicroservice(
+                FeatureFlag::INVOICE_GENERATION_MICROSERVICE,
+                $project->toArray()
+            );
+
+        $invoice = new Invoice();
+        
+        $invoice->setProject($project);
+        $invoice->setInvoiceNumber(rand(10000,99999));
+        $invoice->setAmount(rand(100000,999999) / 100);
+        $invoice->setDate($project->getEndTime()->format('Y-m-d'));
+        
+        $em->persist($invoice);
+
+        $em->flush();
+
+        return $invoice->toArray();
+    }
     
     private function setProjectDetails(Project &$project, $projectDetails) {
         $project->setName($projectDetails['name']);
@@ -54,8 +86,8 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $projects = $em->getRepository('ProjectsBundle:Project')->findAll();
+        
+        $projects = $em->getRepository(Project::class)->findAll();
         
         $projectsJson = [];
 
@@ -82,20 +114,14 @@ class DefaultController extends Controller
         $em->persist($project);
 
         $em->flush();
-
-        // TODO - FEATURE TOGGLER goes here
-
-        $invoice = new Invoice();
         
-        $invoice->setProject($project);
-        $invoice->setInvoiceNumber(rand(10000,99999));
-        $invoice->setAmount(rand(100000,999999) / 100);
-        $invoice->setDate($project->getEndTime()->format('Y-m-d'));
+        $invoice = $this->createInvocieForProject($em, $project);
 
-        $em->persist($project);
-        $em->persist($invoice);
-        
-        return new JsonResponse($project->toArray());
+        $result = $project->toArray();
+
+        $result[Project::INVOICE] = $invoice;
+
+        return new JsonResponse($result); 
     }
 
     /**

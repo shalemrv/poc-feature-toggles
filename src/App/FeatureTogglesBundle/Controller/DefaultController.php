@@ -50,7 +50,7 @@ class DefaultController extends Controller
     {
         $flags = $this->get(ServicesList::FEATURE_TOGGLES)->getFlags();
 
-        echo json_encode($flags, JSON_PRETTY_PRINT);
+        echo json_encode($flags);
 
         foreach($flags as $flagName => $flag) {
             echo "\n\n";
@@ -87,7 +87,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $featureFlags = $em->getRepository('FeatureTogglesBundle:FeatureFlag')->findAll();
+        $featureFlags = $em->getRepository(FeatureFlag::class)->findAll();
         
         $featureFlagsJson = [];
 

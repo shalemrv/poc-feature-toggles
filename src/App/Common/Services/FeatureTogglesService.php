@@ -2,18 +2,15 @@
 
 namespace App\Common\Services;
 
-use App\FeatureTogglesBundle\Entity\FeatureFlag;
-
 use Doctrine\ORM\EntityManager;
 
+use App\FeatureTogglesBundle\Entity\FeatureFlag;
 
 class FeatureTogglesService {
 
-    private static $inMemFlags = [];
+    private $flags = [];
 
     private $em;
-
-    private $creationTime;
     
     public function __construct(EntityManager $em) {
 
@@ -25,17 +22,17 @@ class FeatureTogglesService {
     }
 
     public function getFlags() {
-        return self::$inMemFlags;
+        return $this->flags;
     }
 
     public function updateFlags() {
         
-        $featureFlags = $this->em->getRepository('FeatureTogglesBundle:FeatureFlag')->findAll();
+        $featureFlags = $this->em->getRepository(FeatureFlag::class)->findAll();
         
-        self::$inMemFlags = [];
+        $this->flags = [];
 
         foreach ($featureFlags as $flag) {
-            self::$inMemFlags[$flag->getName()] = [
+            $this->flags[$flag->getName()] = [
                 FeatureFlag::ID         => $flag->getId(),
                 FeatureFlag::ACTIVE     => true,
                 FeatureFlag::PERCENTAGE => $flag->getPercentage()
@@ -46,21 +43,17 @@ class FeatureTogglesService {
     public function isAllowed($flagName, $id = 0) {
         
         // If Flag does not exist
-        if (!isset(self::$inMemFlags[$flagName]))
+        if (!isset($this->flags[$flagName]))
             return false;
 
-        $flagDetails = self::$inMemFlags[$flagName];
+        $flagDetails = $this->flags[$flagName];
 
         // If Flag is not active
-        if (!$flagDetails['active'])
+        if (!$flagDetails[FeatureFlag::ACTIVE])
             return false;
     
         // If $id is in the allowed percentage
-        return ($id % 100) < $flagDetails['percentage'];
-    }
-
-    public function getCreationTime() {
-        return $this->creationTime;
+        return ($id % 100) < $flagDetails[FeatureFlag::PERCENTAGE];
     }
 
 }

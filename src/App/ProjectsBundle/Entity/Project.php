@@ -18,6 +18,7 @@ class Project
     const START         = 'start';
     const END           = 'end';
     const DESCRIPTION   = 'description';
+    const INVOICE       = 'invoice';
 
     /**
      * @var int

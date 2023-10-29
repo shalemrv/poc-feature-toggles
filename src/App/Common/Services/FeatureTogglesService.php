@@ -44,7 +44,7 @@ class FeatureTogglesService {
 
     public function isAllowed($flagName, $id = 0) {
         
-        // If Flag does not exist
+        // If Flag is not active or does not exist
         if (!isset($this->flags[$flagName]))
             return false;
 

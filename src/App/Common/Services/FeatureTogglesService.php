@@ -27,7 +27,9 @@ class FeatureTogglesService {
 
     public function updateFlags() {
         
-        $featureFlags = $this->em->getRepository(FeatureFlag::class)->findAll();
+        $featureFlags = $this->em->getRepository(FeatureFlag::class)->findBy([
+            FeatureFlag::ACTIVE => true
+        ]);
         
         $this->flags = [];
 
@@ -47,11 +49,7 @@ class FeatureTogglesService {
             return false;
 
         $flagDetails = $this->flags[$flagName];
-
-        // If Flag is not active
-        if (!$flagDetails[FeatureFlag::ACTIVE])
-            return false;
-    
+        
         // If $id is in the allowed percentage
         return ($id % 100) < $flagDetails[FeatureFlag::PERCENTAGE];
     }

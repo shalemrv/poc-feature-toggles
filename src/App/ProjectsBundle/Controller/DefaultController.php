@@ -32,7 +32,7 @@ class DefaultController extends Controller
         ];
     }
 
-    private function createInvocieForProject(EntityManager &$em, Project $project) {
+    private function createInvoiceForProject(EntityManager &$em, Project $project) {
 
         $featureTogglesService = $this->get(ServicesList::FEATURE_TOGGLES);
         
@@ -112,7 +112,7 @@ class DefaultController extends Controller
 
         $em->flush();
         
-        $invoice = $this->createInvocieForProject($em, $project);
+        $invoice = $this->createInvoiceForProject($em, $project);
 
         $result = $project->toArray();
 

@@ -25,7 +25,7 @@ class DefaultController extends Controller
 {
     use HttpRequestTrait;
 
-    private function createInvoiceThroughMicroservice($service, $request) {
+    private function createInvoiceThroughMicroservice(Project &$project) {
         // Microservice called here
         return [
             "message" => "Invoice Microservice called"
@@ -37,10 +37,7 @@ class DefaultController extends Controller
         $featureTogglesService = $this->get(ServicesList::FEATURE_TOGGLES);
         
         if($featureTogglesService->isAllowed(FeatureFlag::INVOICE_GENERATION_MICROSERVICE))
-            return $this->createInvoiceThroughMicroservice(
-                FeatureFlag::INVOICE_GENERATION_MICROSERVICE,
-                $project->toArray()
-            );
+            return $this->createInvoiceThroughMicroservice($project);
 
         $invoice = new Invoice();
         

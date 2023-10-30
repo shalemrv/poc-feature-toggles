@@ -17,8 +17,6 @@ class FeatureTogglesService {
         $this->em = $em;
         
         $this->updateFlags();
-        
-        $this->creationTime = date('Y-m-d H:i:s');
     }
 
     public function getFlags() {
@@ -34,11 +32,8 @@ class FeatureTogglesService {
         $this->flags = [];
 
         foreach ($featureFlags as $flag) {
-            $this->flags[$flag->getName()] = [
-                FeatureFlag::ID         => $flag->getId(),
-                FeatureFlag::ACTIVE     => true,
-                FeatureFlag::PERCENTAGE => $flag->getPercentage()
-            ];
+            if ($flag->getPercentage() > 0)
+                $this->flags[$flag->getName()] = $flag->getPercentage();
         }
     }
 
@@ -48,10 +43,10 @@ class FeatureTogglesService {
         if (!isset($this->flags[$flagName]))
             return false;
 
-        $flagDetails = $this->flags[$flagName];
+        $percentageAllowed = $this->flags[$flagName];
         
         // If $id is in the allowed percentage
-        return ($id % 100) < $flagDetails[FeatureFlag::PERCENTAGE];
+        return ($id % 100) < $percentageAllowed;
     }
 
 }

@@ -80,6 +80,7 @@ class Invoice
     public function __construct()
     {
         $this->paymentStatus = 'UNPAID';
+        $this->setDate();
     }
 
 
@@ -173,9 +174,9 @@ class Invoice
      *
      * @return Invoice
      */
-    public function setDate($date)
+    public function setDate($date = null)
     {
-        $this->date = new DateTime($date);
+        $this->date = $date ? new DateTime($date) : new DateTime();
 
         return $this;
     }

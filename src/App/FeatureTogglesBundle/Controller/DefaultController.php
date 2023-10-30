@@ -24,8 +24,8 @@ class DefaultController extends Controller
 
     private function setFeatureFlagDetails(FeatureFlag &$featureFlag, $featureFlagDetails) {
         $featureFlag->setName($featureFlagDetails[FeatureFlag::NAME]);
-        $featureFlag->setActive($featureFlagDetails[FeatureFlag::ACTIVE]);
-        $featureFlag->setPercentage($featureFlagDetails[FeatureFlag::PERCENTAGE]);
+        $featureFlag->setActive(!!$featureFlagDetails[FeatureFlag::ACTIVE]);
+        $featureFlag->setPercentage(intval($featureFlagDetails[FeatureFlag::PERCENTAGE]));
     }
 
     private function extractAndSetFeatureFlagDetails(Request $request, FeatureFlag &$featureFlag) {

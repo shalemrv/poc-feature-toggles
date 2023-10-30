@@ -1,0 +1,160 @@
+{
+	"info": {
+		"_postman_id": "46831414-f12c-499c-a1cd-c2e676f07047",
+		"name": "Sf2 - Project Mgmt - Feature Toggles",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29642119"
+	},
+	"item": [
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "All Projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE}}/projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Single Project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE}}/projects/2"
+					},
+					"response": []
+				},
+				{
+					"name": "New Project",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Postman - Test Project\",\r\n    \"description\": \"This was created by a request in Postman\",\r\n    \"start\": \"2023-10-01 00:00:00\",\r\n    \"end\": \"2023-10-10 23:59:59\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE}}/projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Project",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"EDITED - Postman - Test Project\",\r\n    \"description\": \"This was created by a request in Postman\",\r\n    \"start\": \"2023-10-01 00:00:00\",\r\n    \"end\": \"2023-10-10 23:59:59\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE}}/projects/6"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{BASE}}/projects/8"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Feature Flags",
+			"item": [
+				{
+					"name": "All Flags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE}}/feature-toggles"
+					},
+					"response": []
+				},
+				{
+					"name": "All Flags - Test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE}}/feature-toggles/test"
+					},
+					"response": []
+				},
+				{
+					"name": "New Flag",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"name\": \"ADVERTISING_MICROSERVICE\",\r\n    \"active\": true,\r\n    \"percentage\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE}}/feature-toggles"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Flag",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"INVOICE_GENERATION_MICROSERVICE\",\r\n    \"active\": false,\r\n    \"percentage\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE}}/feature-toggles/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Flag",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{BASE}}/feature-toggles/3"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoices",
+			"item": [
+				{
+					"name": "All Invoices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE}}/invoices"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

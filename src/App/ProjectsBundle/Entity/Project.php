@@ -127,7 +127,7 @@ class Project
      *
      * @return Project
      */
-    public function setStartTime($start)
+    public function setStartTime($start = 'now')
     {
         $this->start = new DateTime($start);
 
@@ -151,7 +151,7 @@ class Project
      *
      * @return Project
      */
-    public function setEndTime($end)
+    public function setEndTime($end = 'now')
     {
         $this->end = new DateTime($end);
 

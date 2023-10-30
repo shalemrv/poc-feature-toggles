@@ -53,7 +53,7 @@ class DefaultController extends Controller
 
         $em->flush();
 
-        return $invoice->toArray();
+        return $invoice->toArray(false);
     }
     
     private function setProjectDetails(Project &$project, $projectDetails) {

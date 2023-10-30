@@ -255,15 +255,19 @@ class Invoice
      *
      * @return array
      */
-    public function toArray()
+    public function toArray($withProject = true)
     {
-        return [
+        $invoiceArray = [
             self::ID                => $this->id,
             self::INVOICE_NUMBER    => $this->invoiceNumber,
             self::DATE              => $this->date->format('Y-m-d'),
             self::PAYMENT_STATUS    => $this->paymentStatus,
-            self::COMMENTS          => $this->comments,
-            self::PROJECT           => $this->project->toArray(),
+            self::COMMENTS          => $this->comments
         ];
+        
+        if ($withProject)
+            $invoiceArray[self::PROJECT] = $this->project->toArray();
+  
+        return $invoiceArray;
     }
 }

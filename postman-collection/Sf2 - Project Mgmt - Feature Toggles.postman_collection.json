@@ -120,7 +120,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"INVOICE_GENERATION_MICROSERVICE\",\r\n    \"active\": false,\r\n    \"percentage\": 100\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"INVOICE_GENERATION_MICROSERVICE\",\r\n    \"active\": true,\r\n    \"percentage\": 100\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

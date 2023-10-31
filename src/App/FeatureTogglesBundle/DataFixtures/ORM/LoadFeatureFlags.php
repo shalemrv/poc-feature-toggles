@@ -2,15 +2,19 @@
 
 namespace App\ProjectsBundle\DataFixtures\ORM;
 
-use DateTime;
-
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 use App\FeatureTogglesBundle\Entity\FeatureFlag;
 
+class LoadLoadFeatureFlags implements FixtureInterface, OrderedFixtureInterface {
+    
+    public function getOrder()
+    {
+        return 1;
+    }
 
-class LoadLoadFeatureFlags implements FixtureInterface {
     /**
      * {@inheritDoc}
      */

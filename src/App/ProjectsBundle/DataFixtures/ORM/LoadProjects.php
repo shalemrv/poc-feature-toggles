@@ -2,21 +2,28 @@
 
 namespace App\ProjectsBundle\DataFixtures\ORM;
 
-use DateTime;
-
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 use App\ProjectsBundle\Entity\Project;
 
-class LoadProjects implements FixtureInterface {
+class LoadProjects implements FixtureInterface, OrderedFixtureInterface {
+    
+    public function getOrder()
+    {
+        return 2;
+    }
+
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager) {
 
         for ($i = 1; $i <= 3; $i++) {
-            echo "\nCreating Project $i";
+            echo PHP_EOL;
+
+            echo "\tCreating Project $i";
 
             $project = new Project();
 
@@ -31,5 +38,8 @@ class LoadProjects implements FixtureInterface {
         }
 
         $manager->flush();
+
+        echo PHP_EOL;
+
     }
 }

@@ -2,17 +2,20 @@
 
 namespace App\ProjectsBundle\DataFixtures\ORM;
 
-use DateTime;
-
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 use App\InvoicesBundle\Entity\Invoice;
 use App\ProjectsBundle\Entity\Project;
-use App\FeatureTogglesBundle\Entity\FeatureFlag;
 
+class LoadInvoices implements FixtureInterface, OrderedFixtureInterface {
+    
+    public function getOrder()
+    {
+        return 3;
+    }
 
-class LoadInvoices implements FixtureInterface {
     /**
      * {@inheritDoc}
      */
@@ -21,7 +24,9 @@ class LoadInvoices implements FixtureInterface {
         $projects = $manager->getRepository(Project::class)->findAll();
 
         foreach($projects as $project) {
-            echo "Creating Invoice for project - " . $project->getId();
+            echo PHP_EOL;
+            
+            echo "\tCreating Invoice for project - " . $project->getId();
             
             $invoice = new Invoice();
         

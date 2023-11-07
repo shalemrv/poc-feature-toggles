@@ -35,8 +35,13 @@ class DefaultController extends Controller
     private function createInvoiceForProject(EntityManager &$em, Project $project) {
 
         $featureTogglesService = $this->get(ServicesList::FEATURE_TOGGLES);
+
+        $mustGoThroughInvoiceMicroservice = $featureTogglesService->isAllowed(
+                                                FeatureFlag::INVOICE_GENERATION_MICROSERVICE,
+                                                $project->getId()
+                                            );  
         
-        if($featureTogglesService->isAllowed(FeatureFlag::INVOICE_GENERATION_MICROSERVICE, $project->getId()))
+        if($mustGoThroughInvoiceMicroservice)
             return $this->createInvoiceThroughMicroservice($project);
 
         $invoice = new Invoice();

@@ -36,7 +36,7 @@ class DefaultController extends Controller
 
         $featureTogglesService = $this->get(ServicesList::FEATURE_TOGGLES);
         
-        if($featureTogglesService->isAllowed(FeatureFlag::INVOICE_GENERATION_MICROSERVICE))
+        if($featureTogglesService->isAllowed(FeatureFlag::INVOICE_GENERATION_MICROSERVICE, $project->getId()))
             return $this->createInvoiceThroughMicroservice($project);
 
         $invoice = new Invoice();

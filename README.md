@@ -18,18 +18,12 @@ ________
   composer install
 ```
 
+For Windows
 ```console
-  php app/console doctrine:database:create
+  init.bat
 ```
 
+For Linux
 ```console
-  php app/console doctrine:schema:create
-```
-
-```console
-  php app/console doctrine:fixtures:load
-```
-
-```console
-  php app/console server:run
+  bash init.bat
 ```

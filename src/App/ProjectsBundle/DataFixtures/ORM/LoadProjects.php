@@ -20,7 +20,9 @@ class LoadProjects implements FixtureInterface, OrderedFixtureInterface {
      */
     public function load(ObjectManager $manager) {
 
-        for ($i = 1; $i <= 3; $i++) {
+        $noOfDummyProjects = 10;
+
+        for ($i = 1; $i <= $noOfDummyProjects; $i++) {
             echo PHP_EOL;
 
             echo "\tCreating Project $i";

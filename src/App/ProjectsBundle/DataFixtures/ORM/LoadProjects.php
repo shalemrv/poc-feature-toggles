@@ -29,7 +29,7 @@ class LoadProjects implements FixtureInterface, OrderedFixtureInterface {
 
             $project = new Project();
 
-            $project->setName('DocFix - Project - ' . rand(100,999));
+            $project->setName('DocFix - Project - ' . rand(100, 999));
             $project->setDescription('This was added by Doctrine fixtures');
             $project->setStartTime();
             $project->setEndTime('tomorrow');

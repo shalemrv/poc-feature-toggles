@@ -59,7 +59,7 @@ class DefaultController extends Controller
     }
     
     private function setProjectDetails(Project &$project, $projectDetails) {
-        $project->setName($projectDetails['name']);
+        $project->setName($projectDetails['name'] . ' - ' . rand(100, 999));
         $project->setDescription($projectDetails['description']);
         $project->setStartTime($projectDetails['start']);
         $project->setEndTime($projectDetails['end']);

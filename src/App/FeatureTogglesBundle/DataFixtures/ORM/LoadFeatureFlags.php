@@ -24,7 +24,7 @@ class LoadLoadFeatureFlags implements FixtureInterface, OrderedFixtureInterface 
 
         $featureFlag1->setName(FeatureFlag::INVOICE_GENERATION_MICROSERVICE);
         $featureFlag1->setActive(false);
-        $featureFlag1->setPercentage(100);
+        $featureFlag1->setPercentage(15);
         
         $featureFlag2 = new FeatureFlag();
 
